@@ -1,0 +1,208 @@
+---
+title: "EPM analysis with DLC Analyzer"
+author: "Hannah Lapp"
+date: "7/15/2023"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Set up the workspace  
+## Load libraries  
+You may need to install the packages below if the are not already installed.
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(sp)         #tested with v1.3-2
+library(imputeTS)   #tested with v3.0
+library(ggplot2)    #tested with v3.1.0
+library(ggmap)      #tested with v3.0.0
+library(data.table) #tested with v1.12.8
+library(cowplot)    #tested with v0.9.4
+library(corrplot)   #tested with v0.84
+```
+
+## Add DLC Analyzer functions  
+We will need several functions from DLC Analyzer. You should download their code here: https://github.com/ETHZ-INS/DLCAnalyzer.
+The specific file we need is in DLCAnalyzer-master/R/DLCAnalyzer_Function_Final.R.
+Run the line below to import the functions from that file.
+```{r}
+source('~/BP anxiety (sofiia)/DLCAnalyzer_Functions_final.R')
+```
+
+# Import your dlc data  
+Change the path below to the deeplabcut csv output you want to analyze.
+```{r}
+    data <- "~/BP anxiety (sofiia)/77F6_17_10_2022__15_04DLC_resnet50_epm-singleMar11shuffle1_150000_filtered.csv"
+```
+
+Next, import the DLC csv file as a DLCAnalyzer object. It will automatically separate different components of the csv file in one list called "Tracking". Tracking$data is a list where each element is a separate data frame with the coordinates and likelihood score for each body point. 
+
+Make sure the "fps" is set to the correct rate for frames-per-second for your video, otherwise the timing data that the analysis returns will not be correct.  
+```{r}
+Tracking <- ReadDLCDataFromCSV(file = data, fps = 30)
+```
+
+# Check the tracking   
+The likelihood score given for each body point in each frame can be thought as a a rating of how confident that model is that it tracked that point correctly. The values range from 0 to 1, with 1 being very confident. For videos where the animal is in the frame for the entire video and does not have many occlusions (e.g. filming above during EPM), there should be few frames with low likelihood scores if the tracking was good. We can look at the likelihood score distributions to get an idea of how well the animal was tracked. 
+Note: Always confirm that your deeplabcut network is working well for tracking before analyzing data! The steps below are just meant to catch any anomalies that may slip through.  
+
+Let's plot histograms of the likelihood scores for a few key body points that may be used in the analysis. If the tracking is good, most points should be near 1 with only a few below .5.  
+
+Nose:
+```{r warning=FALSE, message=FALSE}
+Tracking$data$nose %>% ggplot(aes(x = likelihood))+
+  geom_histogram()+theme_bw()+
+  ggtitle("Nose likelihood")
+```
+
+Top of the head:
+```{r warning=FALSE, message=FALSE}
+Tracking$data$top_head %>% ggplot(aes(x = likelihood))+
+  geom_histogram()+theme_bw()+
+  ggtitle("Top_head likelihood")
+```
+
+Back 3 (center of the body):
+```{r warning=FALSE, message=FALSE}
+Tracking$data$back_3 %>% ggplot(aes(x = likelihood))+
+  geom_histogram()+theme_bw()+
+  ggtitle("Back_3 likelihood")
+```
+
+Similarly, we can find out how many frames have likelihood scores below .5.   
+
+```{r echo=FALSE}
+print(paste("Number of frames where top_head has low likelihood:", nrow(filter(Tracking$data$top_head, likelihood <.5))))
+print(paste("Number of frames where back_3 has low likelihood:", nrow(filter(Tracking$data$back_3, likelihood <.5))))
+```
+We can also evaluate the tracking by plotting all the positions of a body parts across all frames. 
+```{r echo=FALSE}
+PlotPointData(Tracking, points = c("nose","top_head", "back_3"))
+```
+    
+Assuming that the majority of points have high likelihood scores, we can proceed. It's okay if there are a few points with low likelihood scores, they will get cleaned up later.  
+
+# Define the zones of the EPM  
+
+Load the zone info and add it to the Tracking object. This csv should be stored in the same folder as your deeplabcut output. 
+Note: the order of arena points listed matters.  
+```{r}
+zoneinfo <- read.csv("~/BP anxiety (sofiia)/EPM_zone_info.csv")
+names(zoneinfo)[1] <- "arena"
+Tracking <- AddZones(Tracking,zoneinfo)
+```
+
+Check that the zones are being read correctly by plotting them. You should see the outline of an EPM.   
+Note: the dlc y axis begins at the top and ggplot default axis begins at the bottom, so the zone plot will be inverted.   
+```{r}
+PlotZones(Tracking) #plot is inverted from how it looks in the video
+```
+
+Define the inclusion zone. Any tracked points outside the inclusion zone will be removed during the data cleanup. The "factor" parameter allows you to include points a little outside your defined zones, for example the rat poking it's head outside of the open arms. A factor of 1.4 will create an inclusion zone 40% larger than the defined zones.  
+```{r}
+inclusion.zone <- ScalePolygon(Tracking$zones$arena, factor = 1.4)
+```
+
+# Clean data  
+Clean up low likelihood points and  points outside the inclusion zone. These points are interpolated across frames.  
+```{r}
+Tracking <- CleanTrackingData(Tracking, likelihoodcutoff = 0.5, existence.pol = inclusion.zone)
+```
+
+Take a look at the cleaned up points: 
+Hopefully all of the bad tracking points have been removed. If you see abnormal tracking, you may need to do additional clean up or retrain your model to get better pose estimation results.   
+```{r}
+PlotPointData(Tracking, points = c("nose","top_head", "back_3"))
+```
+
+# Convert from pixels to centimeters  
+We want to convert the units to something more meaningful than pixels for our analysis. We can use the known size of the EPM to do this (in our rat EPM, one arm is 50cm long). Adjust this value as needed. 
+```{r}
+Tracking <- CalibrateTrackingData(Tracking, method = "distance",in.metric = 50, points = c("r_open_top","r_center"))
+print(paste("Pixels to cm:", Tracking$px.to.cm))
+```
+The x and y axis should now be in cm units instead of pixels.  
+
+# Analyze the data!  
+ 
+```{r echo =FALSE}
+#First, do movement calculations:
+Tracking <- CalculateMovement(Tracking, movement_cutoff = 2, integration_period = 5)
+#Next we need to rename some of our animal tracking points to make them consistent DLC analyzer will look for: 
+names(Tracking$data) <- c( "nose",
+                      "btwn_eyes",
+                      "earl",
+                      "earr",
+                      "headcentre",
+                      "neck",
+                      "back_2",
+                      "bodycentre",
+                      "back_4",
+                      "back_5",
+                      "back_6",
+                      "tail_base",
+                      "left_side",
+                      "right_side",
+                      "l_closed_top",
+                      "r_closed_top",
+                      "l_closed_bottom",
+                      "r_closed_botton",
+                      "l_open_top",
+                      "r_open_top",
+                      "l_open_bottom",
+                      "r_open_bottom",
+                      "l_center",
+                      "top_center",
+                      "r_center",
+                      "bottom_center") 
+```
+
+# Plots 
+
+Gantt plot for each part of the arena for different body parts:  
+```{r}
+PlotZoneVisits(Tracking,point = c("nose","headcentre","bodycentre"),zones = c("open.left", "open.right", "center", "closed.top", "closed.bottom"))
+```
+
+Plot nose dips:
+```{r}
+PlotLabels(Tracking)
+```
+
+Create density plots:
+```{r}
+plots <- PlotDensityPaths(Tracking,points = c("nose","headcentre","bodycentre"))
+plots$nose
+plots$headcentre
+plots$bodycentre
+```
+### Overall video summary:
+```{r}
+Tracking <- EPMAnalysis(Tracking, movement_cutoff = 5,integration_period = 5,points = "bodycentre", nosedips = TRUE)
+t(data.frame(Tracking$Report[1:6]))
+```
+### Zone reports using the center of the animal (back_3).  
+```{r echo= FALSE}
+Report_closed.top <- data.frame(ZoneReport(Tracking, point = "bodycentre", zones = c("closed.top")))
+Report_closed.bottom <- ZoneReport(Tracking, point = "bodycentre", zones = c("closed.bottom"))
+Report_closed.all <- ZoneReport(Tracking, point = "bodycentre", zones = c("closed.top", "closed.bottom"))
+Report_open.left <- ZoneReport(Tracking, point = "bodycentre", zones = c("open.left"))
+Report_open.right <- ZoneReport(Tracking, point = "bodycentre", zones = c("open.right"))
+Report_open.all <- ZoneReport(Tracking, point = "bodycentre", zones = c("open.left", "open.right"))
+Report_center <- ZoneReport(Tracking, point = "bodycentre", zones = c("center"))
+
+t(data.frame(Report_closed.top))
+t(data.frame(Report_closed.bottom))
+t(data.frame(Report_closed.all))
+t(data.frame(Report_open.left))
+t(data.frame(Report_open.right))
+t(data.frame(Report_open.all))
+t(data.frame(Report_center))
+```
+
+

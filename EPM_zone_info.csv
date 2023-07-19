@@ -1,0 +1,13 @@
+﻿arena,closed.top,closed.bottom,open.left,open.right,center
+l_closed_top,l_closed_top,r_center,l_open_bottom,l_open_top,top_center
+r_closed_top,r_closed_top,r_closed_botton,l_center,r_open_top,l_center
+top_center,top_center,l_closed_bottom,bottom_center,r_center,bottom_center
+l_open_top,l_center,bottom_center,r_open_bottom,top_center,r_center
+r_open_top,,,,,
+r_center,,,,,
+r_closed_botton,,,,,
+l_closed_bottom,,,,,
+bottom_center,,,,,
+r_open_bottom,,,,,
+l_open_bottom,,,,,
+l_center,,,,,

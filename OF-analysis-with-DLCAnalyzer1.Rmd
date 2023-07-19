@@ -1,0 +1,168 @@
+---
+title: "OF analsis with DLCAnalyzer"
+author: "Hannah Lapp"
+date: "7/19/2022"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+# Set so that long lines in R will be wrapped:
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80), tidy=TRUE)
+```
+## R Markdown
+
+# Set up the workspace  
+## Load libraries  
+You may need to install the packages below if the are not already installed.  
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(sp)         #tested with v1.3-2
+library(imputeTS)   #tested with v3.0
+library(ggplot2)    #tested with v3.1.0
+library(ggmap)      #tested with v3.0.0
+library(data.table) #tested with v1.12.8
+library(cowplot)    #tested with v0.9.4
+library(corrplot)   #tested with v0.84
+```
+## Add DLC Analyzer functions  
+We will need several functions from DLC Analyzer. You should download their code here: https://github.com/ETHZ-INS/DLCAnalyzer.
+The specific file we need is in DLCAnalyzer-master/R/DLCAnalyzer_Function_Final.R. Move that file to you working directory.
+Next, run the line below to import the functions from that file.
+```{r}
+source('~/BP anxiety (sofiia)/DLCAnalyzer_Functions_final.R')
+```
+
+# Import your dlc data  
+Change the file name below to the deeplabcut csv output you want to analyze.
+```{r tidy=TRUE, tidy.opts=list(width.cutoff=60)}
+  data <- "~/CN4 - J female L bot label shown incorrectDLC_resnet50_rat-open-field-single-animalMar16shuffle1_120000.csv"
+
+Tracking <- ReadDLCDataFromCSV(file = data, fps = 30)
+```
+
+Plot histograms of the likelihood scores for a few key body points that will be used in the analysis. If the tracking is good, most points should be near 1 with only a few below .5.  
+
+Nose:
+```{r warning=FALSE, message=FALSE}
+Tracking$data$nose %>% ggplot(aes(x = likelihood))+
+  geom_histogram()+theme_bw()+
+  ggtitle("Nose likelihood")
+
+Tracking$data$top_head %>% ggplot(aes(x = likelihood))+
+  geom_histogram()+theme_bw()+
+  ggtitle("Top_head likelihood")
+
+Tracking$data$back_3 %>% ggplot(aes(x = likelihood))+
+  geom_histogram()+theme_bw()+
+  ggtitle("Back_3 likelihood")
+```
+
+
+Similarly, we can find out how many frames have likelihood scores below .5.   
+
+Top of the head:
+```{r echo=FALSE}
+print(paste("Number of frames top_head low likelihood:", (nrow(filter(Tracking$data$top_head, likelihood <.5)))))
+
+print(paste("Number of frames back_3 low likelihood:", (nrow(filter(Tracking$data$back_3, likelihood <.5)))))
+
+print(paste("Number of frames back_3 low likelihood:", (nrow(filter(Tracking$data$back_3, likelihood <.5)))))
+```
+
+We can also evaluate the tracking by plotting all the positions of a body parts across all frames. 
+```{r echo=FALSE}
+PlotPointData(Tracking, points = c("nose","top_head", "back_3"))
+```
+    
+Assuming that the majority of points have high likelihood scores, we can proceed. The few points with low likelihood scores will get cleaned up later.  
+
+Let's clean up points with likelihood scores below .5
+```{r}
+Tracking <- CleanTrackingData(Tracking, likelihoodcutoff = 0.5)
+```
+
+Check the plots to see if cleaning up improved tracking:  
+```{r}
+#check to see if cleaning up helped
+PlotPointData(Tracking, points = c("nose","top_head", "back_3"))
+```
+
+Calibrate measurement units by converting from pixels to cm  
+```{r}
+Tracking <- CalibrateTrackingData(Tracking, method = "area",in.metric = 60*60, points = c("top_left_corner","top_right_corner","bottom_right_corner","bottom_left_corner"))
+Tracking$px.to.cm
+```
+
+# Set the analysis zones  
+```{r echo = FALSE}
+Tracking <- AddOFTZones(Tracking, scale_center = 0.5,scale_periphery  = 0.6666 ,scale_corners = 0.34, points =c("top_left_corner","top_right_corner","bottom_right_corner","bottom_left_corner")) #center is set to half of arena (30 cm), periphery is set to 10cm
+PlotZones(Tracking)
+```
+
+Convert names of points over to DLCAnalyzer names:  
+```{r echo = FALSE}
+tracking_points <- c( "nose",
+                      "btwn_eyes",
+                      "earl",
+                      "earr",
+                      "headcentre",
+                      "neck",
+                      "back_2",
+                      "bodycentre",
+                      "back_4",
+                      "back_5",
+                      "back_6",
+                      "tailbase",
+                      "left_side",
+                      "right_side",
+                      "tl",
+                      "tr",
+                      "bl",
+                      "br",
+                      "arena_center") 
+names(Tracking$data) <- tracking_points
+```
+
+#Calculate speed and movement  
+Using center of body
+```{r}
+Tracking <- CalculateMovement(Tracking, movement_cutoff = 5, integration_period = 5)
+```
+
+
+# Do some analysis!  
+Create zone reports  
+```{r}
+Report_center <- ZoneReport(Tracking, point = "bodycentre", zones = "center")
+Report_periphery <- ZoneReport(Tracking, point = "bodycentre", zones = "periphery")
+Report_tl_corner <- ZoneReport(Tracking, point = "bodycentre", zones = c("corner.top_left_corner"))
+Report_tr_corner <- ZoneReport(Tracking, point = "bodycentre", zones = c("corner.top_right_corner"))
+Report_bl_corner <- ZoneReport(Tracking, point = "bodycentre", zones = c("corner.bottom_left_corner"))
+Report_br_corner <- ZoneReport(Tracking, point = "bodycentre", zones = c("corner.bottom_right_corner"))
+                                                                      
+Report_arena <- ZoneReport(Tracking, point = "bodycentre", zones = "arena")
+t(data.frame(Report_arena))
+t(data.frame(Report_center))
+t(data.frame(Report_periphery))
+t(data.frame(Report_tl_corner))
+t(data.frame(Report_tr_corner))
+t(data.frame(Report_bl_corner))
+t(data.frame(Report_br_corner))
+```
+  
+# Create plots  
+Zone visits:  
+```{r}
+PlotZoneVisits(Tracking,point = c("bodycentre","nose","tailbase"))
+```
+  
+Density plots:  
+```{r echo = FALSE}
+plots <- PlotDensityPaths(Tracking,points = c("bodycentre","nose","tailbase"))
+plots <- AddZonesToPlots(plots,Tracking$zones)
+plots$bodycentre
+plots$nose
+plots$tailbase
+```
