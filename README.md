@@ -1,5 +1,5 @@
-# Automated_anxiety
-pose estimation models and analysis code for EPM and open field
+# Automated anxiety
+pose estimation models with deeplabcut and analysis code for EPM and open field in R
 
 EPM model: trained on Long-Evans rats. Tracks rats body points and EPM zones for use with deeplabcut
   Use EPM Rmd file for analysis.
