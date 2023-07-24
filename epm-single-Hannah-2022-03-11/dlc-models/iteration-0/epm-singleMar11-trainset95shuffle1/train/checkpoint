@@ -1,0 +1,5 @@
+model_checkpoint_path: "D:\\BP anxiety\\epm-single-Hannah-2022-03-11\\dlc-models\\iteration-0\\epm-singleMar11-trainset95shuffle1\\train\\snapshot-200000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\epm-single-Hannah-2022-03-11\\dlc-models\\iteration-0\\epm-singleMar11-trainset95shuffle1\\train\\snapshot-185000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\epm-single-Hannah-2022-03-11\\dlc-models\\iteration-0\\epm-singleMar11-trainset95shuffle1\\train\\snapshot-190000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\epm-single-Hannah-2022-03-11\\dlc-models\\iteration-0\\epm-singleMar11-trainset95shuffle1\\train\\snapshot-195000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\epm-single-Hannah-2022-03-11\\dlc-models\\iteration-0\\epm-singleMar11-trainset95shuffle1\\train\\snapshot-200000"

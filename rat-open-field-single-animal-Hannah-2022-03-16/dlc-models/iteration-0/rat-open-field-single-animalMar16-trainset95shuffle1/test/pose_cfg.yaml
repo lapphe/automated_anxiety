@@ -1,0 +1,48 @@
+all_joints:
+- - 0
+- - 1
+- - 2
+- - 3
+- - 4
+- - 5
+- - 6
+- - 7
+- - 8
+- - 9
+- - 10
+- - 11
+- - 12
+- - 13
+- - 14
+- - 15
+- - 16
+- - 17
+- - 18
+all_joints_names:
+- nose
+- btwn_eyes
+- left_ear
+- right_ear
+- top_head
+- back_1
+- back_2
+- back_3
+- back_4
+- back_5
+- back_6
+- tail_base
+- left_side
+- right_side
+- top_left_corner
+- top_right_corner
+- bottom_left_corner
+- bottom_right_corner
+- arena_center
+dataset: training-datasets\iteration-0\UnaugmentedDataSet_rat-open-field-single-animalMar16\rat-open-field-single-animal_Hannah95shuffle1.mat
+global_scale: 0.8
+init_weights: C:\ProgramData\Anaconda\envs\DEEPLABCUT\lib\site-packages\deeplabcut\pose_estimation_tensorflow\models\pretrained\resnet_v1_50.ckpt
+location_refinement: true
+locref_stdev: 7.2801
+net_type: resnet_50
+num_joints: 19
+scoremap_dir: test

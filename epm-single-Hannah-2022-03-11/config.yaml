@@ -1,0 +1,189 @@
+    # Project definitions (do not edit)
+Task: epm-single
+scorer: Hannah
+date: Mar11
+multianimalproject: false
+identity:
+
+    # Project path (change when moving around)
+project_path: D:\BP anxiety\epm-single-Hannah-2022-03-11
+
+    # Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  D:\Sofiia\EPM practice\B26_18_11_2021__18_03.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM practice\B34_18_11_2021__17_45.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM practice\B35_18_11_2021__17_51.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM practice\Test_19_11_2021__16_05.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM practice\18M5_19_11_2021__17_33.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM practice\24M6_22_11_2021__15_35.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM videos\cohort2\raw\24M5_22_11_2021__15_22.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM videos\cohort2\raw\27M6_22_11_2021__16_01.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM videos\cohort2\raw\30M6_22_11_2021__16_24.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM videos\cohort2\raw\31M5_22_11_2021__16_37.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM videos\cohort2\raw\23F6_23_11_2021__15_50.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM videos\cohort2\raw\18M5_19_11_2021__17_33.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM_practice\F44t_17_02_2022__15_21.mp4:
+    crop: 0, 1280, 0, 768
+  D:\Sofiia\EPM_practice\M9t_17_02_2022__14_41.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 5\67F5_17_10_2022__18_06.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 5\68F5_17_10_2022__17_32.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 5\73F6_17_10_2022__14_28.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 5\73M6_16_10_2022__20_12.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 5\77M6_16_10_2022__19_24.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\87F5_15_11_2022__16_53.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\91M5_14_11_2022__16_07.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\93F6_15_11_2022__15_52.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\99M5_14_11_2022__15_52.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\102F5_15_11_2022__18_26.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\102M6_14_11_2022__19_44.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\89F5_19_11_2022__14_45.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\89F6_19_11_2022__15_45.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\98F5_19_11_2022__14_33.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\98F6_19_11_2022__15_32.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\100F5_19_11_2022__14_20.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\100F6_19_11_2022__15_12.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\108F5_19_11_2022__14_07.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\EPM videos\cohort 6\output\108F6_19_11_2022__14_59.mp4:
+    crop: 0, 1280, 0, 768
+bodyparts:
+- nose
+- btwn_eyes
+- left_ear
+- right_ear
+- top_head
+- back_1
+- back_2
+- back_3
+- back_4
+- back_5
+- back_6
+- tail_base
+- left_side
+- right_side
+- l_closed_top
+- r_closed_top
+- l_closed_bottom
+- r_closed_botton
+- l_open_top
+- r_open_top
+- l_open_bottom
+- r_open_bottom
+- l_center
+- top_center
+- r_center
+- bottom_center
+start: 0
+stop: 1
+numframes2pick: 1
+
+    # Plotting configuration
+skeleton:
+- - nose
+  - btwn_eyes
+- - btwn_eyes
+  - top_head
+- - top_head
+  - back_1
+- - back_1
+  - back_2
+- - back_2
+  - back_3
+- - back_3
+  - back_4
+- - back_4
+  - back_5
+- - back_5
+  - back_6
+- - back_6
+  - tailbase
+- - left_ear
+  - top_head
+- - right_ear
+  - top_head
+- - left_side
+  - back_1
+- - left_side
+  - back_2
+- - left_side
+  - back_3
+- - left_side
+  - back_4
+- - left_side
+  - back_5
+- - left_side
+  - back_6
+- - left_side
+  - tail_base
+- - right_side
+  - back_1
+- - right_side
+  - back_2
+- - right_side
+  - back_3
+- - right_side
+  - back_4
+- - right_side
+  - back_5
+- - right_side
+  - back_6
+- - right_side
+  - tail_base
+skeleton_color: red
+pcutoff: 0.6
+dotsize: 5
+alphavalue: 0.7
+colormap: rainbow
+
+    # Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_50
+default_augmenter: default
+snapshotindex: -1
+batch_size: 8
+
+    # Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+    #if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+    # Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true

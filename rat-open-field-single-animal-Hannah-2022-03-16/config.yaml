@@ -1,0 +1,243 @@
+    # Project definitions (do not edit)
+Task: rat-open-field-single-animal
+scorer: Hannah
+date: Mar16
+multianimalproject: false
+identity:
+
+    # Project path (change when moving around)
+project_path: D:/BP anxiety/rat-open-field-single-animal-Hannah-2022-03-16
+
+    # Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  D:\BP anxiety\OF videos\reruns\73F5_15_10_2022__15_26.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\84F5_15_10_2022__16_04.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\67F5_15_10_2022__15_26.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\68M6_14_10_2022__14_38.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\73M5_14_10_2022__16_58.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/13M6_20_10_2021__16_00.MP4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/M10.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/M9.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/M8.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/M7.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/M6.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/M5.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/F6.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/F5.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/F4.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/F3.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/F2.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hunter-lab-troy-open-field-videos/F1.MP4:
+    crop: 0, 1440, 0, 1080
+  /media/user1/Vol1/hannah-umb-open-field-videos/MVI_1095.MP4:
+    crop: 0, 1920, 0, 1080
+  /media/user1/Vol1/hannah-umb-open-field-videos/MVI_1078.MP4:
+    crop: 0, 1920, 0, 1080
+  /media/user1/Vol1/hannah-umb-open-field-videos/MVI_1072.mp4:
+    crop: 0, 1920, 0, 1080
+  /media/user1/Vol1/hannah-umb-open-field-videos/MVI_0418.mp4:
+    crop: 0, 1920, 0, 1080
+  /media/user1/Vol1/hannah-umb-open-field-videos/1M5_20_10_2021__14_48.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/5F5_21_10_2021__17_40.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/5M5_20_10_2021__15_35.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/8F6_21_10_2021__16_19.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/8M5_20_10_2021__14_48.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/9M6_20_10_2021__15_35.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/11F6_21_10_2021__16_44.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/11M5_20_10_2021__14_48.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/13M6_20_10_2021__16_00.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/14F6_21_10_2021__16_19.mp4:
+    crop: 0, 1280, 0, 768
+  /media/user1/Vol1/hannah-umb-open-field-videos/2F5_21_10_2021__16_44.mp4:
+    crop: 0, 710, 0, 756
+  /media/user1/Vol1/hannah-umb-open-field-videos/2F6_21_10_2021__16_19.mp4:
+    crop: 0, 740, 0, 764
+  D:\Sofiia\OF videos\cohort 2\preprocessed\18M6_16_11_2021__18_45.mp4:
+    crop: 0, 798, 0, 722
+  D:\Sofiia\OF videos\cohort 2\preprocessed\23F5_17_11_2021__16_24.mp4:
+    crop: 0, 762, 0, 760
+  D:\Sofiia\OF videos\cohort 2\preprocessed\23F6_17_11_2021__15_59.mp4:
+    crop: 0, 766, 0, 712
+  D:\Sofiia\OF videos\cohort 2\preprocessed\24F6_17_11_2021__16_48.mp4:
+    crop: 0, 764, 0, 740
+  D:\BP anxiety\OF videos\cohort 5\68F6_15_10_2022__17_28.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\69F5_15_10_2022__16_04.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\69M5_14_10_2022__16_58.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\73F6_15_10_2022__16_46.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 5\77F6_15_10_2022__16_46.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 6\87F6_13_11_2022__17_12.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 6\88F5_13_11_2022__14_50.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 6\91F5_13_11_2022__15_32.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 6\93M6_12_11_2022__13_41.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 6\99M5_12_11_2022__15_32.mp4:
+    crop: 0, 1280, 0, 768
+  D:\BP anxiety\OF videos\cohort 6\103F6_13_11_2022__16_23.mp4:
+    crop: 0, 1280, 0, 768
+
+  D:\Sydney\single_animal_OF\26H - L male L bot.MP4:
+    crop: 0, 1920, 0, 1080
+  D:\Sydney\single_animal_OF\CN5 - N male R top.MP4:
+    crop: 0, 1920, 0, 1080
+  D:\Sydney\single_animal_OF\CN7 - X female R top.MP4:
+    crop: 0, 1920, 0, 1080
+  D:\Sydney\single_animal_OF\CN7 - X male L bot.MP4:
+    crop: 0, 1920, 0, 1080
+  D:\Sydney\single_animal_OF\SNCF - II male R top.mp4:
+    crop: 0, 1920, 0, 1080
+bodyparts:
+- nose
+- btwn_eyes
+- left_ear
+- right_ear
+- top_head
+- back_1
+- back_2
+- back_3
+- back_4
+- back_5
+- back_6
+- tail_base
+- left_side
+- right_side
+- top_left_corner
+- top_right_corner
+- bottom_left_corner
+- bottom_right_corner
+- arena_center
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+
+    # Fraction of video to start/stop when extracting frames for labeling/refinement
+start: 0
+stop: 1
+numframes2pick: 15
+
+    # Plotting configuration
+skeleton:
+- - top_right_corner
+  - arena_center
+- - nose
+  - btwn_eyes
+- - btwn_eyes
+  - top_head
+- - top_head
+  - back_1
+- - back_1
+  - back_2
+- - back_2
+  - back_3
+- - back_3
+  - back_4
+- - back_4
+  - back_5
+- - back_5
+  - back_6
+- - back_6
+  - tailbase
+- - left_ear
+  - top_head
+- - right_ear
+  - top_head
+- - left_side
+  - back_1
+- - left_side
+  - back_2
+- - left_side
+  - back_3
+- - left_side
+  - back_4
+- - left_side
+  - back_5
+- - left_side
+  - back_6
+- - left_side
+  - tail_base
+- - right_side
+  - back_1
+- - right_side
+  - back_2
+- - right_side
+  - back_3
+- - right_side
+  - back_4
+- - right_side
+  - back_5
+- - right_side
+  - back_6
+- - right_side
+  - tail_base
+skeleton_color: black
+pcutoff: 0.6
+dotsize: 5
+alphavalue: 0.7
+colormap: rainbow
+
+    # Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_50
+default_augmenter: default
+snapshotindex: all
+batch_size: 8
+
+    # Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+    #if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+    # Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
