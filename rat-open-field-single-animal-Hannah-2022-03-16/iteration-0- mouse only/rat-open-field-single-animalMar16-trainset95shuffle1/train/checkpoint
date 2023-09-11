@@ -1,0 +1,7 @@
+model_checkpoint_path: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-120000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-20000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-40000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-60000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-80000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-100000"
+all_model_checkpoint_paths: "D:\\BP anxiety\\rat-open-field-single-animal-Hannah-2022-03-16\\dlc-models\\iteration-0\\rat-open-field-single-animalMar16-trainset95shuffle1\\train\\snapshot-120000"
