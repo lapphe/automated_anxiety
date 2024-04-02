@@ -1,11 +1,10 @@
 ---
 title: "OF analsis with DLCAnalyzer"
 author: "Hannah Lapp"
-date: "7/19/2022"
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
+date: "2/26/24"
+output: pdf_document
+params: 
+  input_csv: "default.csv"
 ---
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 # Set so that long lines in R will be wrapped:
@@ -31,15 +30,20 @@ We will need several functions from DLC Analyzer. You should download their code
 The specific file we need is in DLCAnalyzer-master/R/DLCAnalyzer_Function_Final.R. Move that file to you working directory.
 Next, run the line below to import the functions from that file.
 ```{r}
-source('~/BP anxiety (sofiia)/DLCAnalyzer_Functions_final.R')
+source('./DLCAnalyzer_Functions_final.R')
 ```
 
 # Import your dlc data  
 Change the file name below to the deeplabcut csv output you want to analyze.
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=60)}
-  data <- "~/CN4 - J female L bot label shown incorrectDLC_resnet50_rat-open-field-single-animalMar16shuffle1_120000.csv"
+  data1 <- paste("Z:/hannah/automated_anxiety-main/Lab meeting examples/", 
+                params$input_csv, sep ="")
 
-Tracking <- ReadDLCDataFromCSV(file = data, fps = 30)
+#df <- read.csv(data)[,-1]
+#rewrite_csv <- 
+#write.csv(df, row.names=FALSE, file = data)
+
+Tracking <- ReadDLCDataFromCSV(file = data1, fps = 30)
 ```
 
 Plot histograms of the likelihood scores for a few key body points that will be used in the analysis. If the tracking is good, most points should be near 1 with only a few below .5.  
